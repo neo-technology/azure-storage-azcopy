@@ -1,0 +1,22 @@
+name: Master
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '*'
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  production:
+    runs-on: ubuntu-latest
+    container:
+      image: golang:1.17-buster
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: go build
+        run: go build

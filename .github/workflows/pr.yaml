@@ -1,0 +1,38 @@
+name: PR
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/pr.yaml'
+      - '*'
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: golang:1.17-buster
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: go fmt
+        run: |
+          if [[ $( gofmt -l ./cmd ./common ./common/parallel ./ste ./azbfs ./sddl | wc -l) -gt 0  ]]; then
+            echo "The following files need to be formatted."
+            echo "Please run the following command: go fmt ./cmd ./common ./common/parallel ./ste ./azbfs ./sddl"
+            gofmt -l ./cmd ./common ./common/parallel ./ste ./azbfs ./sddl
+            #return 1
+          fi
+      - name: go build
+        run: go build
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: azure-storage-azcopy
+          asset_name: azcopy
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "Forked Azcopy"
