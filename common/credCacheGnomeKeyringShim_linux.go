@@ -1,4 +1,6 @@
+//go:build !se_integration
 // +build !se_integration
+
 // For public version azcopy, gnome keyring is not necessary, and no need to
 // involve additional dependencies to libsecret-1 and glib-2.0
 
