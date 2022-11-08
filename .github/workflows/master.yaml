@@ -19,6 +19,14 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
+      - name: go fmt
+        run: |
+          if [[ $( gofmt -l ./cmd ./common ./common/parallel ./ste ./azbfs ./sddl | wc -l) -gt 0  ]]; then
+            echo "The following files need to be formatted."
+            echo "Please run the following command: go fmt ./cmd ./common ./common/parallel ./ste ./azbfs ./sddl"
+            gofmt -l ./cmd ./common ./common/parallel ./ste ./azbfs ./sddl
+            return 1
+          fi
       - name: go build
         run: go build
       - name: Upload binaries to release
