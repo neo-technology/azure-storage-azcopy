@@ -24,12 +24,3 @@ jobs:
           fi
       - name: go build
         run: go build
-      - name: Upload binaries to release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: azure-storage-azcopy
-          asset_name: azcopy
-          tag: v10.16.1-forked
-          overwrite: false
-          body: "Forked Azcopy"
