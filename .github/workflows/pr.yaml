@@ -1,8 +1,5 @@
 name: PR
 on:
-#  push:
-#    branches:
-#      - feature/add-gha
   workflow_dispatch:
     inputs:
       tag:
