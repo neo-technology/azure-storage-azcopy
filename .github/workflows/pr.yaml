@@ -3,11 +3,11 @@ on:
   push:
     branches:
       - feature/add-gha
-    workflow_dispatch:
-      inputs:
-        name: tag
-        description: Tag to be created for the release
-        type: string
+  workflow_dispatch:
+    inputs:
+      name: tag
+      description: Tag to be created for the release
+      type: string
 
 defaults:
   run:
