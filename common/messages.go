@@ -14,9 +14,9 @@ type LCMMsgType uint16
 
 var ELCMMsgType LCMMsgType
 
-func (LCMMsgType) Invalid() LCMMsgType { return LCMMsgType(0) }
-func (LCMMsgType) CancelJob() LCMMsgType { return LCMMsgType(1) }
-func (LCMMsgType) E2EInterrupts() LCMMsgType { return LCMMsgType(2) }
+func (LCMMsgType) Invalid() LCMMsgType               { return LCMMsgType(0) }
+func (LCMMsgType) CancelJob() LCMMsgType             { return LCMMsgType(1) }
+func (LCMMsgType) E2EInterrupts() LCMMsgType         { return LCMMsgType(2) }
 func (LCMMsgType) PerformanceAdjustment() LCMMsgType { return LCMMsgType(3) }
 
 func (m *LCMMsgType) Parse(s string) error {
@@ -38,10 +38,10 @@ type LCMMsgReq struct {
 }
 
 type LCMMsgResp struct {
-	TimeStamp time.Time       `json:"TimeStamp"`
-	MsgType   string          `json:"ResponseType"`
-	Value     fmt.Stringer    `json:"Value"`
-	Err       error           `json:"-"`
+	TimeStamp time.Time    `json:"TimeStamp"`
+	MsgType   string       `json:"ResponseType"`
+	Value     fmt.Stringer `json:"Value"`
+	Err       error        `json:"-"`
 }
 
 type LCMMsg struct {
@@ -74,10 +74,10 @@ type PerfAdjustmentReq struct {
 }
 
 type PerfAdjustmentResp struct {
-	Status                            bool          `json:"status"`
-	AdjustedThroughPut                int64         `json:"cap-mbps"`
-	NextAdjustmentAfter               time.Time     `json:"NextAdjustmentAfter"`
-	Err                               string        `json:"error"`
+	Status              bool      `json:"status"`
+	AdjustedThroughPut  int64     `json:"cap-mbps"`
+	NextAdjustmentAfter time.Time `json:"NextAdjustmentAfter"`
+	Err                 string    `json:"error"`
 }
 
 func (p PerfAdjustmentResp) String() string {
